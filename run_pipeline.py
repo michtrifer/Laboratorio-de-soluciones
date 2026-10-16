@@ -10,12 +10,17 @@ Ejemplos (desde la raíz del repo, en Git Bash o la terminal de PyCharm):
 """
 import argparse
 import logging
+import sys
 
 from src import config
 from src.pipeline import run
 
 
 def main():
+    # Windows usa cp1252 por defecto: forzar UTF-8 para que los logs con "→" no fallen.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--steps", nargs="+", default=["data", "eda", "models"],
                    choices=["data", "eda", "models"])

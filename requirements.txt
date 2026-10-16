@@ -11,5 +11,6 @@ matplotlib>=3.7
 seaborn>=0.12
 pytest>=7.0
 jupyter
+torch
 # opcional para el LSTM (#13):
 # torch>=2.0
